@@ -17,6 +17,6 @@ Ce script vous permettra de visualiser les termes les plus fréquents dans votre
 
 Analyse de fréquence Term-Frequency (TF) sur le corpus. Ce processus  donne une vue quantitative précise des termes qui apparaissent le plus souvent dans le corpus, offrant des insights sur les sujets et thèmes dominants dans vos données.
 
-## Matrice de Co-occurrence
+## Matrice de co-occurrence
 
 Créer une matrice de co-occurrence pour un corpus de texte est une façon d'explorer les relations et les contextes dans lesquels les mots apparaissent ensemble. Cette approche peut révéler des associations entre les mots qui ne sont pas immédiatement évidentes. La matrice de co-occurrence compte combien de fois chaque paire de mots apparaît ensemble dans un contexte donné, souvent dans la même phrase ou dans un fenêtre de mots fixe.
