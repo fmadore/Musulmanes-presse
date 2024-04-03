@@ -12,3 +12,7 @@ Ce script effectue le prétraitement en utilisant spaCy et sauvegarde les résul
 ## Nuage de mots
 
 Ce script vous permettra de visualiser les termes les plus fréquents dans votre corpus après prétraitement.
+
+## Fréquence de termes
+
+Analyse de fréquence Term-Frequency (TF) sur le corpus. Ce processus  donne une vue quantitative précise des termes qui apparaissent le plus souvent dans le corpus, offrant des insights sur les sujets et thèmes dominants dans vos données.
