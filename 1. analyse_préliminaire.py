@@ -22,12 +22,16 @@ plt.title('Nombre d\'articles par année')
 plt.xlabel('Année')
 plt.ylabel('Nombre d\'articles')
 plt.xticks(rotation=45)
+plt.tight_layout() # Ajuste automatiquement les paramètres de la figure pour qu'elle s'adapte
+plt.savefig('articles_par_annee.png') # Enregistrer la figure
 plt.show()
 
 # Visualisation 2: Répartition des articles par journal
-plt.figure(figsize=(10, 6))
-sns.countplot(y='Publisher', data=df, order = df['Publisher'].value_counts().index, palette='viridis')
+plt.figure(figsize=(12, 8)) # Ajustez la taille de la figure si nécessaire pour mieux adapter les noms des journaux
+sns.countplot(y='Publisher', data=df, order=df['Publisher'].value_counts().index, palette='viridis')
 plt.title('Nombre d\'articles par journal')
 plt.xlabel('Nombre d\'articles')
 plt.ylabel('Journal')
+plt.tight_layout(rect=[0.15, 0, 1, 1]) # Ajustez cette ligne pour augmenter l'espace à gauche
+plt.savefig('articles_par_journal.png') # Enregistrer la figure
 plt.show()
