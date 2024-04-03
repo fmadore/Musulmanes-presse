@@ -1,48 +1,43 @@
+import pandas as pd
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
+from tqdm import tqdm
 
-# Assurez-vous d'avoir téléchargé les ressources nécessaires de NLTK
+tqdm.pandas()
+
+# Téléchargements nécessaires de NLTK, assurez-vous qu'ils sont déjà effectués
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('averaged_perceptron_tagger')
 
+# Charger le DataFrame
+url = 'https://github.com/fmadore/Musulmanes-presse/raw/master/Corpus.csv'
+df = pd.read_csv(url, usecols=['dcterms:title', 'dcterms:creator', 'dcterms:publisher', 'dcterms:date', 'bibo:content'])
+df.columns = ['Title', 'Creator', 'Publisher', 'Date', 'Content']
 
-# Fonction pour convertir les tags de nltk en tags compatibles avec wordnet lemmatizer
+# Fonctions de prétraitement
 def get_wordnet_pos(word):
-    """Map POS tag to first character lemmatize() accepts"""
     tag = nltk.pos_tag([word])[0][1][0].upper()
-    tag_dict = {"J": wordnet.ADJ,
-                "N": wordnet.NOUN,
-                "V": wordnet.VERB,
-                "R": wordnet.ADV}
-
+    tag_dict = {"J": wordnet.ADJ, "N": wordnet.NOUN, "V": wordnet.VERB, "R": wordnet.ADV}
     return tag_dict.get(tag, wordnet.NOUN)
 
-
-# Initialiser le lemmatizer
 lemmatizer = WordNetLemmatizer()
 
-
-# Prétraitement des textes
 def preprocess_texts(text):
-    # Tokenisation
-    tokens = word_tokenize(text.lower())  # Convertir en minuscule et tokeniser
-
-    # Filtrage des stopwords
+    tokens = word_tokenize(text.lower())
     tokens = [word for word in tokens if word.isalpha() and word not in stopwords.words('french')]
-
-    # Lemmatisation
     lemmatized_tokens = [lemmatizer.lemmatize(w, get_wordnet_pos(w)) for w in tokens]
-
     return lemmatized_tokens
 
+# Application du prétraitement et sauvegarde du résultat
+df['Processed_Content'] = df['Content'].progress_apply(preprocess_texts)
 
-# Appliquer le prétraitement à chaque article
-df['Processed_Content'] = df['Content'].apply(preprocess_texts)
+# Sauvegarder dans un nouveau fichier CSV
+output_path = 'preprocessed_corpus.csv'
+df.to_csv(output_path, index=False)
 
-# Afficher les résultats
-print(df[['Content', 'Processed_Content']].head())
+print(f"Le fichier prétraité a été sauvegardé avec succès à l'emplacement suivant : {output_path}")
