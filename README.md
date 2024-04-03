@@ -4,4 +4,11 @@ Ce code vous aidera à charger votre fichier CSV, à le préparer pour l'analyse
 
 ## Prétraitement
 
-Ce script commence par définir une fonction get_wordnet_pos qui convertit les tags de partie du discours (POS tags) utilisés par NLTK en tags compatibles avec le WordNetLemmatizer. Ensuite, il définit une fonction preprocess_texts qui effectue la tokenisation, la suppression des stopwords, et la lemmatisation sur un texte donné. Enfin, cette fonction de prétraitement est appliquée à chaque article dans le DataFrame df, et les résultats sont stockés dans une nouvelle colonne Processed_Content. Cette étape de prétraitement prépare vos données pour des analyses plus complexes et aide à réduire le bruit dans vos données, améliorant ainsi la qualité de vos résultats analytiques.
+SpaCy est utilisé ici pour traiter chaque article, en retirant les stopwords et la ponctuation, et en appliquant la lemmatisation. Le modèle moyen (fr_core_news_md) est choisi pour une meilleure précision par rapport au modèle petit sans être trop lourd comme le modèle grand.
+Tqdm est utilisé pour fournir une barre de progression visuelle durant l'application du prétraitement. Notez l'utilisation de tqdm.pandas() pour l'intégrer avec les opérations pandas.
+La fonction preprocess_spacy remplace preprocess_texts pour le prétraitement des textes avec spaCy. Elle crée une liste de lemmes pour chaque token qui n'est ni un stopword ni un signe de ponctuation, puis joint ces lemmes en une chaîne de caractères unique.
+Ce script effectue le prétraitement en utilisant spaCy et sauvegarde les résultats dans un nouveau fichier CSV. Cela devrait améliorer la qualité du prétraitement grâce à l'usage d'un modèle linguistique plus avancé et spécifique au français.
+
+## Nuage de mots
+
+Ce script vous permettra de visualiser les termes les plus fréquents dans votre corpus après prétraitement.
