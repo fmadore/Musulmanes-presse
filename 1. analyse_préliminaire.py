@@ -46,7 +46,6 @@ sns.barplot(x='Counts', y='Publisher', data=publisher_counts, palette='viridis',
 plt.title('Nombre d\'articles par journal')
 plt.xlabel('Nombre d\'articles')
 plt.ylabel('Journal')
-plt.legend().remove()  # Retirer la légende générée par l'utilisation de hue
 plt.tight_layout(rect=[0, 0, 1, 1])
 plt.savefig('articles_par_journal.png')
 plt.show()
@@ -59,7 +58,6 @@ sns.barplot(x='Nombre d\'articles', y='Pays', data=country_counts, palette='cool
 plt.title('Nombre d\'articles par pays')
 plt.xlabel('Nombre d\'articles')
 plt.ylabel('Pays')
-plt.legend().remove()  # Retirer la légende générée par l'utilisation de hue
 plt.tight_layout(rect=[0, 0, 1, 1])
 plt.savefig('articles_par_pays.png')
 plt.show()
