@@ -17,3 +17,5 @@ Analyse de fréquence Term-Frequency (TF) sur le corpus. Ce processus donne une 
 ## Matrice de co-occurrence
 
 Création d'une matrice de co-occurrence pour le corpus. Permet d'explorer les relations et les contextes dans lesquels les mots apparaissent ensemble. Cette approche peut révéler des associations entre les mots qui ne sont pas immédiatement évidentes. La matrice de co-occurrence compte combien de fois chaque paire de mots apparaît ensemble dans un contexte donné, souvent dans la même phrase ou dans un fenêtre de mots fixe.
+
+## Graphe de co-occurrence
