@@ -1,11 +1,12 @@
 ## Analyse préliminaire
 
 Analyse préliminaire sur le corpus pour obtenir une idée de la répartition des articles par journal et par année.
-[] À ajouter le pays correspondant pour chaque journal
+*À ajouter le nombre de mots, le nombre de mots par pays*
 
 ## Prétraitement
 
 SpaCy est utilisé ici pour traiter chaque article, en retirant les stopwords et la ponctuation, et en appliquant la lemmatisation. Le modèle moyen (fr_core_news_md) est choisi pour une meilleure précision. SpaCy crée une liste de lemmes pour chaque token qui n'est ni un stopword ni un signe de ponctuation, puis joint ces lemmes en une chaîne de caractères unique. Les résultats sont sauvegardé dans un nouveau fichier CSV.
+*À ajouter le pays correspondant pour chaque journal*
 
 ## Nuage de mots
 
