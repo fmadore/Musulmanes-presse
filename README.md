@@ -1,6 +1,7 @@
 ## Analyse préliminaire
 
 Analyse préliminaire sur le corpus pour obtenir une idée de la répartition des articles par journal et par année.
+[] À ajouter le pays correspondant pour chaque journal
 
 ## Prétraitement
 
@@ -21,3 +22,5 @@ Création d'une matrice de co-occurrence pour le corpus. Permet d'explorer les r
 ## Graphe de co-occurrence
 
 Ce script charge le corpus, prétraite les données en appliquant un nettoyage et une liste d'exclusion, calcule les co-occurrences, crée un graphe avec NetworkX en filtrant les paires par un seuil de co-occurrence, puis utilise pyvis pour générer une visualisation interactive que vous pouvez explorer dans un navigateur web.
+
+## Analyse des sentiments
