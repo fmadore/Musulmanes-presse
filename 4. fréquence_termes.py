@@ -35,7 +35,7 @@ def analyze_word_frequency(text, title_suffix, save_filename):
 
 # Analyser la fréquence des mots pour l'ensemble du corpus
 all_text = ' '.join(df['Processed_Content'].dropna())
-analyze_word_frequency(all_text, "Corpus Entier", "top_25_mots_fréquents_total")
+analyze_word_frequency(all_text, "corpus entier", "top_25_mots_fréquents_total")
 
 # Analyser la fréquence des mots par pays
 for country in df['Pays'].unique():
