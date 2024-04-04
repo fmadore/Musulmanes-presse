@@ -63,3 +63,17 @@ plt.legend().remove()  # Retirer la légende générée par l'utilisation de hue
 plt.tight_layout(rect=[0, 0, 1, 1])
 plt.savefig('articles_par_pays.png')
 plt.show()
+
+# Visualisation 4: Nombre total de mots par pays
+plt.figure(figsize=(12, 8))
+df['Word_Count'] = df['Content'].apply(lambda x: len(str(x).split()))
+words_per_country = df.groupby('Pays')['Word_Count'].sum().reset_index()
+words_per_country.columns = ['Pays', 'Nombre total de mots']
+words_per_country = words_per_country.sort_values('Nombre total de mots', ascending=False)
+sns.barplot(x='Nombre total de mots', y='Pays', data=words_per_country, palette='coolwarm', hue='Pays', dodge=False)
+plt.title('Nombre total de mots par pays')
+plt.xlabel('Nombre total de mots')
+plt.ylabel('Pays')
+plt.tight_layout(rect=[0, 0, 1, 1])  # Ajustement de la mise en page pour inclure les titres et les légendes correctement
+plt.savefig('mots_par_pays.png')
+plt.show()
