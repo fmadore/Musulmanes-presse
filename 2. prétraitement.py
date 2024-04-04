@@ -18,6 +18,7 @@ df.columns = ['Title', 'Creator', 'Publisher', 'Date', 'Content']
 def clean_text(text):
     text = re.sub(r"’", "'", text)  # Convertir apostrophes courbes en droits
     text = re.sub(r"\s+", " ", text)  # Supprimer les espaces doubles
+    text = re.sub(r"œ", "oe", text)  # Uniformiser les "oe"
     text = text.strip()  # Supprimer les espaces de début et de fin
     return text
 
