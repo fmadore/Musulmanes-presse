@@ -17,7 +17,7 @@ def clean_and_convert_to_list(text):
         return []
 
 # Définir la liste des mots à exclure
-exclusion_list = ['il', 't', "aujourd", "hui", "Burkina", "El", "el", "burkina", "faso", "bénin"]
+exclusion_list = ['il', 't', "aujourd", "hui", "Burkina", "El", "el", "burkina", "faso", "bénin", "vis", "à"]
 
 # Calculer les co-occurrences
 def calculate_co_occurrences(content_list, window_size=5):
