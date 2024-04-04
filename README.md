@@ -26,6 +26,8 @@ Ce script charge le corpus, prétraite les données en appliquant un nettoyage e
 
 ## Analyse des sentiments
 
+Texte brut vs lemmatisé et sans stopwords?
+
 Deux graphiques sont sauvegardés :
 - L'histogramme de la polarité peut aider à voir si les textes sont généralement positifs, négatifs, ou neutres.
 - Le nuage de points Polarité vs Subjectivité peut révéler si les textes plus subjectifs tendent à être plus positifs ou négatifs, ou s'il n'y a pas de relation claire entre subjectivité et polarité.
