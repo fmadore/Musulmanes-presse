@@ -28,3 +28,7 @@ Ce script charge le corpus, prétraite les données en appliquant un nettoyage e
 Deux graphiques sont sauvegardés :
 - L'histogramme de la polarité peut aider à voir si les textes sont généralement positifs, négatifs, ou neutres.
 - Le nuage de points Polarité vs Subjectivité peut révéler si les textes plus subjectifs tendent à être plus positifs ou négatifs, ou s'il n'y a pas de relation claire entre subjectivité et polarité.
+
+## Topic Modeling
+
+L'affichage des topics montre les 4 mots les plus représentatifs de chaque topic.
