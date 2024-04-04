@@ -39,7 +39,7 @@ plt.savefig('articles_par_annee.png')
 plt.show()
 
 # Visualisation 2: Répartition des articles par journal
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(10, 6))
 publisher_counts = df['Publisher'].value_counts().reset_index()
 publisher_counts.columns = ['Publisher', 'Counts']
 sns.barplot(x='Counts', y='Publisher', data=publisher_counts, palette='viridis', order=publisher_counts['Publisher'], hue='Publisher', legend=False)
@@ -52,7 +52,7 @@ plt.savefig('articles_par_journal.png')
 plt.show()
 
 # Visualisation 3: Distribution des articles par pays
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(10, 6))
 country_counts = df['Pays'].value_counts().reset_index()
 country_counts.columns = ['Pays', 'Nombre d\'articles']
 sns.barplot(x='Nombre d\'articles', y='Pays', data=country_counts, palette='coolwarm', order=country_counts['Pays'], hue='Pays', legend=False)
@@ -65,7 +65,7 @@ plt.savefig('articles_par_pays.png')
 plt.show()
 
 # Visualisation 4: Nombre total de mots par pays
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(10, 6))
 df['Word_Count'] = df['Content'].apply(lambda x: len(str(x).split()))
 words_per_country = df.groupby('Pays')['Word_Count'].sum().reset_index()
 words_per_country.columns = ['Pays', 'Nombre total de mots']
