@@ -31,4 +31,4 @@ Deux graphiques sont sauvegardés :
 
 ## Topic Modeling
 
-L'affichage des topics montre les 4 mots les plus représentatifs de chaque topic.
+Permet d'explorer visuellement comment les mots sont distribués à travers les topics, ainsi que la distance relative entre les différents topics, offrant ainsi une compréhension plus profonde et interactive des données textuelles.
