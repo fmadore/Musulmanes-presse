@@ -10,7 +10,7 @@ df = pd.read_csv(url)
 df['Processed_Content'] = df['Processed_Content'].str.lower()
 
 # Définir une liste de mots à exclure (stopwords) en plus des stopwords par défaut
-additional_stopwords = {"el", "être", "t", "mme", "m"}  # Ajouter ici les mots à exclure
+additional_stopwords = {"el", "être", "t", "mme", "m", "bénin", "burkina"}  # Ajouter ici les mots à exclure
 stopwords = set(STOPWORDS).union(additional_stopwords)
 
 # Fonction pour générer un nuage de mots
