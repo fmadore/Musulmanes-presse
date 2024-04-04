@@ -14,6 +14,18 @@ url = 'https://github.com/fmadore/Musulmanes-presse/raw/master/Corpus.csv'
 df = pd.read_csv(url, usecols=['dcterms:title', 'dcterms:creator', 'dcterms:publisher', 'dcterms:date', 'bibo:content'])
 df.columns = ['Title', 'Creator', 'Publisher', 'Date', 'Content']
 
+# Dictionnaire des pays aux éditeurs
+country_to_publishers = {
+    "Burkina Faso": ["Burkina 24", "Carrefour africain", "L’Observateur", "L’Observateur Paalga", "Le Pays", "LeFaso.net", "Mutations", "San Finna", "Sidwaya"],
+    "Bénin": ["Boulevard des Infos", "Daho-Express", "Ehuzu", "La Nation"],
+}
+
+# Inverser le dictionnaire pour obtenir les éditeurs aux pays
+publisher_to_country = {publisher: country for country, publishers in country_to_publishers.items() for publisher in publishers}
+
+# Utiliser le dictionnaire pour ajouter la nouvelle colonne 'Pays'
+df['Pays'] = df['Publisher'].map(publisher_to_country)
+
 # Fonction de nettoyage de texte
 def clean_text(text):
     text = re.sub(r"’", "'", text)  # Convertir apostrophes courbes en droits
