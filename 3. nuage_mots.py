@@ -16,8 +16,8 @@ all_text = ' '.join(df['Processed_Content'].dropna())
 additional_stopwords = {"el", "être", "t", "mme"}  # Ajouter ici les mots à exclure
 stopwords = set(STOPWORDS).union(additional_stopwords)
 
-# Créer un objet WordCloud en excluant les stopwords définis
-wordcloud = WordCloud(width=800, height=800, background_color='white', stopwords=stopwords, min_font_size=10).generate(all_text)
+# Créer un objet WordCloud en excluant les stopwords définis et en désactivant les collocations
+wordcloud = WordCloud(width=800, height=800, background_color='white', stopwords=stopwords, min_font_size=10, collocations=False).generate(all_text)
 
 # Afficher le nuage de mots
 plt.figure(figsize=(8, 8), facecolor=None)
