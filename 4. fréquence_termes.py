@@ -7,7 +7,7 @@ url = 'https://raw.githubusercontent.com/fmadore/Musulmanes-presse/master/prepro
 df = pd.read_csv(url)
 
 # Liste des mots à exclure
-exclusion_list = ['être', 'Burkina']
+exclusion_list = ['être', 'Burkina', 'il', '-t', 'Bénin']
 
 
 # Fonction pour analyser la fréquence des mots et générer un graphique
