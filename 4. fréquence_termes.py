@@ -12,22 +12,30 @@ all_text = ' '.join(df['Processed_Content'].dropna())
 # Calculer la fréquence de chaque terme dans le corpus
 word_counts = Counter(all_text.split())
 
+# Liste des mots à exclure
+exclusion_list = ['être']  # Mots à exclure
+
+# Enlever les mots de la liste d'exclusion du compteur
+for word in exclusion_list:
+    if word in word_counts:
+        del word_counts[word]
+
 # Convertir le compteur en DataFrame pour une manipulation plus facile
 word_freq_df = pd.DataFrame(word_counts.items(), columns=['Word', 'Frequency']).sort_values(by='Frequency', ascending=False).reset_index(drop=True)
 
 # Afficher les 20 mots les plus fréquents
-print(word_freq_df.head(20))
+print(word_freq_df.head(25))
 
-# Visualiser les 20 mots les plus fréquents
+# Visualiser les 25 mots les plus fréquents
 plt.figure(figsize=(10, 8))
-plt.barh(word_freq_df['Word'].head(20), word_freq_df['Frequency'].head(20))
+plt.barh(word_freq_df['Word'].head(25), word_freq_df['Frequency'].head(25))
 plt.gca().invert_yaxis()  # Inverser l'axe y pour afficher le mot le plus fréquent en haut
 plt.xlabel('Fréquence')
 plt.ylabel('Mot')
-plt.title('20 mots les plus fréquents')
+plt.title('25 mots les plus fréquents')
 
 # Enregistrer le graphique en format PNG
-plt.savefig('top_20_mots_fréquents.png')
+plt.savefig('top_25_mots_fréquents.png')
 
 # Afficher le graphique
 plt.show()
