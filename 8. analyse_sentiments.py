@@ -5,7 +5,7 @@ import seaborn as sns
 
 # Charger le fichier CSV depuis GitHub
 url = 'https://raw.githubusercontent.com/fmadore/Musulmanes-presse/master/preprocessed_corpus.csv'
-df = pd.read_csv(url, usecols=['Content'])
+df = pd.read_csv(url, usecols=['Processed_Content'])
 
 # Analyse des sentiments
 def analyse_sentiment(text):
@@ -15,7 +15,7 @@ def analyse_sentiment(text):
     except:
         return None
 
-df[['Polarity', 'Subjectivity']] = df['Content'].apply(analyse_sentiment)
+df[['Polarity', 'Subjectivity']] = df['Processed_Content'].apply(analyse_sentiment)
 
 sns.set(style="whitegrid")
 
