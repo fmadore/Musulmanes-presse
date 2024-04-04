@@ -9,23 +9,28 @@ df = pd.read_csv(url)
 # Convertir tout le texte en minuscules pour assurer la cohérence
 df['Processed_Content'] = df['Processed_Content'].str.lower()
 
-# Combiner tous les textes prétraités en une seule chaîne de caractères
-all_text = ' '.join(df['Processed_Content'].dropna())
-
 # Définir une liste de mots à exclure (stopwords) en plus des stopwords par défaut
 additional_stopwords = {"el", "être", "t", "mme", "m"}  # Ajouter ici les mots à exclure
 stopwords = set(STOPWORDS).union(additional_stopwords)
 
-# Créer un objet WordCloud en excluant les stopwords définis et en désactivant les collocations
-wordcloud = WordCloud(width=800, height=800, background_color='white', stopwords=stopwords, min_font_size=10, collocations=False).generate(all_text)
+# Fonction pour générer un nuage de mots
+def generate_wordcloud(text, filename):
+    wordcloud = WordCloud(width=800, height=800, background_color='white', stopwords=stopwords, min_font_size=10, collocations=False).generate(text)
+    plt.figure(figsize=(8, 8), facecolor=None)
+    plt.imshow(wordcloud)
+    plt.axis("off")
+    plt.tight_layout(pad=0)
+    plt.savefig(f'{filename}.png')
+    plt.close()  # Fermer la figure après l'enregistrement pour éviter l'affichage superflu
 
-# Afficher le nuage de mots
-plt.figure(figsize=(8, 8), facecolor=None)
-plt.imshow(wordcloud)
-plt.axis("off")
-plt.tight_layout(pad=0)
+# Générer un nuage de mots pour l'ensemble du corpus
+all_text = ' '.join(df['Processed_Content'].dropna())
+generate_wordcloud(all_text, 'wordcloud_total')
 
-# Sauvegarder le nuage de mots en format PNG
-plt.savefig('wordcloud.png')
+# Générer un nuage de mots par pays
+for country in df['Pays'].unique():
+    country_text = ' '.join(df[df['Pays'] == country]['Processed_Content'].dropna())
+    if country_text:  # Vérifier si le texte n'est pas vide
+        generate_wordcloud(country_text, f'wordcloud_{country}')
 
-print("Le nuage de mots a été généré et sauvegardé en tant que 'wordcloud_with_exclusions.png'.")
+print("Les nuages de mots ont été générés et sauvegardés.")
