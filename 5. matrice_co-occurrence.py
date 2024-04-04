@@ -30,6 +30,9 @@ def calculate_co_occurrences(content_list, window_size=5):
             for j in range(start, end):
                 if i != j:
                     co_occurred_word = content[j]
+                    # Ignorer si le mot cible est identique au mot co-occurrent
+                    if target_word == co_occurred_word:
+                        continue
                     ordered_pair = tuple(sorted((target_word, co_occurred_word)))
                     co_occurrence[ordered_pair] += 1
     return co_occurrence
