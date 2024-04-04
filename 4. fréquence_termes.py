@@ -13,7 +13,7 @@ all_text = ' '.join(df['Processed_Content'].dropna())
 word_counts = Counter(all_text.split())
 
 # Liste des mots à exclure
-exclusion_list = ['être']  # Mots à exclure
+exclusion_list = ['être', 'Burkina']
 
 # Enlever les mots de la liste d'exclusion du compteur
 for word in exclusion_list:
