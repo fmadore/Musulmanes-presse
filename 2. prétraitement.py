@@ -1,6 +1,7 @@
 import pandas as pd
 import spacy
 from tqdm.auto import tqdm
+import re  # Pour les expressions régulières
 
 # Initialiser tqdm pour pandas
 tqdm.pandas()
@@ -13,10 +14,19 @@ url = 'https://github.com/fmadore/Musulmanes-presse/raw/master/Corpus.csv'
 df = pd.read_csv(url, usecols=['dcterms:title', 'dcterms:creator', 'dcterms:publisher', 'dcterms:date', 'bibo:content'])
 df.columns = ['Title', 'Creator', 'Publisher', 'Date', 'Content']
 
+# Fonction de nettoyage de texte
+def clean_text(text):
+    text = re.sub(r"’", "'", text)  # Convertir apostrophes courbes en droits
+    text = re.sub(r"\s+", " ", text)  # Supprimer les espaces doubles
+    text = text.strip()  # Supprimer les espaces de début et de fin
+    return text
+
 # Fonction de prétraitement utilisant spaCy
 def preprocess_spacy(text):
-    # Traiter le texte avec spaCy
-    doc = nlp(text)
+    # Nettoyer le texte en premier
+    cleaned_text = clean_text(text)
+    # Traiter le texte nettoyé avec spaCy
+    doc = nlp(cleaned_text)
     # Générer une liste de lemmes, en excluant les stopwords et les ponctuations
     lemmatized_tokens = [token.lemma_ for token in doc if not token.is_stop and not token.is_punct]
     # Joindre les tokens pour former une string
