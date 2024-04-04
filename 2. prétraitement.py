@@ -1,7 +1,7 @@
 import pandas as pd
 import spacy
 from tqdm.auto import tqdm
-import re  # Pour les expressions régulières
+import re
 
 # Initialiser tqdm pour pandas
 tqdm.pandas()
