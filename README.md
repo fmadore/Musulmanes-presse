@@ -24,3 +24,7 @@ Création d'une matrice de co-occurrence pour le corpus. Permet d'explorer les r
 Ce script charge le corpus, prétraite les données en appliquant un nettoyage et une liste d'exclusion, calcule les co-occurrences, crée un graphe avec NetworkX en filtrant les paires par un seuil de co-occurrence, puis utilise pyvis pour générer une visualisation interactive que vous pouvez explorer dans un navigateur web.
 
 ## Analyse des sentiments
+
+Deux graphiques sont sauvegardés :
+- L'histogramme de la polarité peut aider à voir si les textes sont généralement positifs, négatifs, ou neutres.
+- Le nuage de points Polarité vs Subjectivité peut révéler si les textes plus subjectifs tendent à être plus positifs ou négatifs, ou s'il n'y a pas de relation claire entre subjectivité et polarité.
