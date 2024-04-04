@@ -6,38 +6,41 @@ import matplotlib.pyplot as plt
 url = 'https://raw.githubusercontent.com/fmadore/Musulmanes-presse/master/preprocessed_corpus.csv'
 df = pd.read_csv(url)
 
-# Combiner tous les textes prétraités en une seule chaîne de caractères
-all_text = ' '.join(df['Processed_Content'].dropna())
-
-# Calculer la fréquence de chaque terme dans le corpus
-word_counts = Counter(all_text.split())
-
 # Liste des mots à exclure
 exclusion_list = ['être', 'Burkina']
 
-# Enlever les mots de la liste d'exclusion du compteur
-for word in exclusion_list:
-    if word in word_counts:
-        del word_counts[word]
 
-# Convertir le compteur en DataFrame pour une manipulation plus facile
-word_freq_df = pd.DataFrame(word_counts.items(), columns=['Word', 'Frequency']).sort_values(by='Frequency', ascending=False).reset_index(drop=True)
+# Fonction pour analyser la fréquence des mots et générer un graphique
+def analyze_word_frequency(text, title_suffix, save_filename):
+    word_counts = Counter(text.split())
+    # Enlever les mots de la liste d'exclusion du compteur
+    for word in exclusion_list:
+        if word in word_counts:
+            del word_counts[word]
+    # Convertir le compteur en DataFrame
+    word_freq_df = pd.DataFrame(word_counts.items(), columns=['Word', 'Frequency']).sort_values(by='Frequency',
+                                                                                                ascending=False).reset_index(
+        drop=True)
 
-# Afficher les 20 mots les plus fréquents
-print(word_freq_df.head(25))
+    # Visualiser les 25 mots les plus fréquents
+    plt.figure(figsize=(10, 8))
+    plt.barh(word_freq_df['Word'].head(25), word_freq_df['Frequency'].head(25))
+    plt.gca().invert_yaxis()  # Inverser l'axe y pour afficher le mot le plus fréquent en haut
+    plt.xlabel('Fréquence')
+    plt.ylabel('Mot')
+    plt.title(f'25 mots les plus fréquents - {title_suffix}')
+    plt.savefig(f'{save_filename}.png')
+    plt.close()  # Fermer le graphique pour éviter l'affichage en mode batch
 
-# Visualiser les 25 mots les plus fréquents
-plt.figure(figsize=(10, 8))
-plt.barh(word_freq_df['Word'].head(25), word_freq_df['Frequency'].head(25))
-plt.gca().invert_yaxis()  # Inverser l'axe y pour afficher le mot le plus fréquent en haut
-plt.xlabel('Fréquence')
-plt.ylabel('Mot')
-plt.title('25 mots les plus fréquents')
 
-# Enregistrer le graphique en format PNG
-plt.savefig('top_25_mots_fréquents.png')
+# Analyser la fréquence des mots pour l'ensemble du corpus
+all_text = ' '.join(df['Processed_Content'].dropna())
+analyze_word_frequency(all_text, "Corpus Entier", "top_25_mots_fréquents_total")
 
-# Afficher le graphique
-plt.show()
+# Analyser la fréquence des mots par pays
+for country in df['Pays'].unique():
+    country_text = ' '.join(df[df['Pays'] == country]['Processed_Content'].dropna())
+    if country_text:  # Vérifier si le texte n'est pas vide
+        analyze_word_frequency(country_text, country, f"top_25_mots_{country}")
 
-print("Le graphique a été enregistré.")
+print("Les graphiques ont été générés et sauvegardés.")
