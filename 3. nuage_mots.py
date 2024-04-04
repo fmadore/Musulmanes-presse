@@ -13,7 +13,7 @@ df['Processed_Content'] = df['Processed_Content'].str.lower()
 all_text = ' '.join(df['Processed_Content'].dropna())
 
 # Définir une liste de mots à exclure (stopwords) en plus des stopwords par défaut
-additional_stopwords = {"el", "être", "t", "mme"}  # Ajouter ici les mots à exclure
+additional_stopwords = {"el", "être", "t", "mme", "m"}  # Ajouter ici les mots à exclure
 stopwords = set(STOPWORDS).union(additional_stopwords)
 
 # Créer un objet WordCloud en excluant les stopwords définis et en désactivant les collocations
