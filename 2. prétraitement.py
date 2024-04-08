@@ -9,10 +9,19 @@ tqdm.pandas()
 # Charger le modèle spaCy français moyen
 nlp = spacy.load("fr_core_news_md")
 
-# Charger le DataFrame
+# Charger le DataFrame en incluant la colonne 'url'
 url = 'https://github.com/fmadore/Musulmanes-presse/raw/master/Corpus.csv'
-df = pd.read_csv(url, usecols=['dcterms:title', 'dcterms:creator', 'dcterms:publisher', 'dcterms:date', 'bibo:content'])
-df.columns = ['Title', 'Creator', 'Publisher', 'Date', 'Content']
+df = pd.read_csv(url, usecols=['dcterms:title', 'dcterms:creator', 'dcterms:publisher', 'dcterms:date', 'bibo:content', 'url'])
+
+# Renommer les colonnes
+df.rename(columns={
+    'dcterms:title': 'Title',
+    'dcterms:creator': 'Creator',
+    'dcterms:publisher': 'Publisher',
+    'dcterms:date': 'Date',
+    'bibo:content': 'Content',
+    'url': 'URL'
+}, inplace=True)
 
 # Dictionnaire des pays aux éditeurs
 country_to_publishers = {
@@ -48,7 +57,9 @@ def preprocess_spacy(text):
 # Appliquer le prétraitement avec une barre de progression
 df['Processed_Content'] = df['Content'].progress_apply(preprocess_spacy)
 
-# Sauvegarder dans un nouveau fichier CSV
+# Sauvegarder dans un nouveau fichier CSV, s'assurer de l'ordre des colonnes
+columns_order = ['Title', 'Creator', 'Publisher', 'Date', 'Content', 'URL', 'Pays', 'Processed_Content']
+df = df[columns_order]  # Réordonner les colonnes selon l'ordre souhaité
 output_path = 'preprocessed_corpus.csv'
 df.to_csv(output_path, index=False)
 
