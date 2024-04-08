@@ -1,7 +1,6 @@
 ## Analyse préliminaire
 
 Analyse préliminaire sur le corpus pour obtenir une idée de la répartition des articles par journal et par année.
-*À ajouter le nombre de mots, le nombre de mots par pays*
 
 ## Prétraitement
 
